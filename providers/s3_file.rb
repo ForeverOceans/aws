@@ -5,6 +5,10 @@ def whyrun_supported?
   true
 end
 
+action :put do
+  do_s3_put_file()
+end
+
 action :create do
   do_s3_file(:create)
 end
@@ -19,6 +23,12 @@ end
 
 action :touch do
   do_s3_file(:touch)
+end
+
+def do_s3_put_file
+  s3 = AWS::S3.new
+  obj = s3.buckets[new_resource.bucket].objects[new_resource.remote_path]
+  obj.write(Pathname.new(new_resource.path))
 end
 
 def do_s3_file(resource_action)
