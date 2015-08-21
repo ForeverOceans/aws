@@ -1,4 +1,4 @@
-actions :create, :create_if_missing, :touch, :delete
+actions :create, :create_if_missing, :touch, :delete, :put
 
 state_attrs :aws_access_key_id,
             :backup,
